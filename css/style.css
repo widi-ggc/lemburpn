@@ -1,0 +1,41 @@
+/*
+  File: css/style.css
+  Bagian dari: Web App Manajemen Lembur Karyawan (MyOvertimes)
+
+  Berisi custom style tambahan di luar utility class Tailwind:
+  animasi toast notifikasi, dan penyesuaian kecil lain yang akan
+  bertambah seiring pembuatan halaman Dashboard, Input Lembur, dsb.
+*/
+
+/* Animasi toast masuk (slide + fade) */
+#toast-container .toast-item {
+  animation: toast-in 0.2s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animasi toast keluar (dipicu class .toast-hide sebelum dihapus dari DOM) */
+#toast-container .toast-hide {
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+/* Scrollbar tipis untuk area yang bisa discroll (tabel, sidebar mobile, dll) */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.4);
+  border-radius: 9999px;
+}
