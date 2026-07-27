@@ -1,9 +1,0 @@
-# File/folder yang tidak perlu ikut disimpan di Git
-
-.DS_Store
-Thumbs.db
-*.log
-node_modules/
-.firebase/
-.firebaserc
-firebase-debug.log
