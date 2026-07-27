@@ -388,6 +388,9 @@ export function terjemahkanErrorAuth(errorCode) {
     "auth/network-request-failed":
       "Gagal terhubung ke server. Periksa koneksi internet Anda.",
     "auth/missing-password": "Password wajib diisi.",
+    "auth/email-already-in-use":
+      "Email ini sudah dipakai akun login lain (kemungkinan sisa akun karyawan yang pernah dihapus profilnya tapi akun login-nya belum dihapus manual). Gunakan email lain, atau hapus dulu akun tsb. lewat Firebase Console \u2192 Authentication \u2192 Users.",
+    "auth/weak-password": "Password terlalu lemah, minimal 6 karakter.",
   };
-  return pesan[errorCode] || "Terjadi kesalahan saat login. Silakan coba lagi.";
+  return pesan[errorCode] || "Terjadi kesalahan. Silakan coba lagi.";
 }
