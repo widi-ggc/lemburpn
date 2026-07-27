@@ -44,6 +44,7 @@ import {
   formatTanggalIndo,
   showToast,
   setButtonLoading,
+  tampilkanMenuKaryawanJikaAdmin,
 } from "./utils.js";
 
 // Cache daftar tanggal libur nasional (Set berisi string "YYYY-MM-DD")
@@ -83,6 +84,8 @@ export function initLemburPage() {
       roleBadge.textContent = "Admin";
       roleBadge.classList.remove("hidden");
     }
+
+    tampilkanMenuKaryawanJikaAdmin(userProfile.role);
 
     initLogout();
     initSidebarDrawer();

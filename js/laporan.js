@@ -31,6 +31,7 @@ import {
   formatAngka,
   getPeriodeBuku,
   showToast,
+  tampilkanMenuKaryawanJikaAdmin,
 } from "./utils.js";
 
 let currentUserProfile = null;
@@ -54,6 +55,8 @@ export function initLaporanPage() {
       roleBadge.textContent = "Admin";
       roleBadge.classList.remove("hidden");
     }
+
+    tampilkanMenuKaryawanJikaAdmin(userProfile.role);
 
     initLogout();
     initSidebarDrawer();

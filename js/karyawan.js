@@ -37,7 +37,12 @@ import {
   getDocs,
   where,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-import { showToast, setButtonLoading, terjemahkanErrorAuth } from "./utils.js";
+import {
+  showToast,
+  setButtonLoading,
+  terjemahkanErrorAuth,
+  tampilkanMenuKaryawanJikaAdmin,
+} from "./utils.js";
 
 let daftarKaryawan = [];
 let editingUid = null; // uid yang sedang diedit (null = mode tambah baru)
@@ -63,6 +68,8 @@ export function initKaryawanPage() {
       roleBadge.textContent = "Admin";
       roleBadge.classList.remove("hidden");
     }
+
+    tampilkanMenuKaryawanJikaAdmin(userProfile.role);
 
     initLogout();
     initSidebarDrawer();

@@ -24,7 +24,12 @@ import {
   deleteDoc,
   doc,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-import { formatTanggalIndo, showToast, setButtonLoading } from "./utils.js";
+import {
+  formatTanggalIndo,
+  showToast,
+  setButtonLoading,
+  tampilkanMenuKaryawanJikaAdmin,
+} from "./utils.js";
 
 let daftarLibur = [];
 let editingId = null;
@@ -50,6 +55,8 @@ export function initSettingPage() {
       roleBadge.textContent = "Admin";
       roleBadge.classList.remove("hidden");
     }
+
+    tampilkanMenuKaryawanJikaAdmin(userProfile.role);
 
     initLogout();
     initSidebarDrawer();

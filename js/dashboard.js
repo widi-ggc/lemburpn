@@ -33,6 +33,7 @@ import {
   getPeriodeBuku,
   formatAngka,
   showToast,
+  tampilkanMenuKaryawanJikaAdmin,
 } from "./utils.js";
 
 let chartPoint = null;
@@ -56,6 +57,8 @@ export function initDashboardPage() {
 
     currentRole = userProfile.role;
     currentUid = userProfile.uid;
+
+    tampilkanMenuKaryawanJikaAdmin(userProfile.role);
 
     initLogout();
     initSidebarDrawer();
@@ -264,6 +267,8 @@ function renderChartPoint(labels, values) {
 
   if (chartPoint) chartPoint.destroy();
 
+  const isDark = document.documentElement.classList.contains("dark");
+
   chartPoint = new Chart(ctx, {
     type: "bar",
     data: {
@@ -278,7 +283,27 @@ function renderChartPoint(labels, values) {
         },
       ],
     },
-    options: chartBaseOptions(),
+    // Plugin datalabels didaftarkan khusus di chart ini saja (bukan global),
+    // supaya hanya "Total Point per Periode Buku" yang menampilkan angka
+    // total di ujung/atas setiap bar.
+    plugins: [ChartDataLabels],
+    options: {
+      ...chartBaseOptions(),
+      layout: {
+        // Beri sedikit ruang ekstra di atas supaya angka tidak terpotong
+        padding: { top: 20 },
+      },
+      plugins: {
+        ...chartBaseOptions().plugins,
+        datalabels: {
+          anchor: "end",
+          align: "top",
+          color: isDark ? "#e2e8f0" : "#1e293b",
+          font: { weight: "600", size: 11 },
+          formatter: (value) => (value > 0 ? formatAngka(value) : ""),
+        },
+      },
+    },
   });
 }
 

@@ -341,6 +341,31 @@ export function hitungPoint(jamLembur, statusHari) {
 }
 
 /* ============================================================
+ * MENU KELOLA KARYAWAN (KHUSUS ADMIN)
+ * ============================================================ */
+
+/**
+ * Menampilkan menu sidebar "Kelola Karyawan" HANYA jika role adalah admin.
+ * Untuk role karyawan, menu ini tetap tersembunyi total dari sidebar
+ * (bukan hanya diblokir saat diklik).
+ *
+ * @param {string} role - "admin" | "karyawan"
+ * @param {string} [elementId="nav-kelola-karyawan"]
+ */
+export function tampilkanMenuKaryawanJikaAdmin(role, elementId = "nav-kelola-karyawan") {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  if (role === "admin") {
+    el.classList.remove("hidden");
+    el.classList.add("flex");
+  } else {
+    el.classList.add("hidden");
+    el.classList.remove("flex");
+  }
+}
+
+/* ============================================================
  * PESAN ERROR FIREBASE AUTH (BAHASA INDONESIA)
  * ============================================================ */
 
