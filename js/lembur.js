@@ -288,7 +288,7 @@ export function isiFormUntukEdit(data, id) {
     "inline-block px-3 py-1.5 rounded-lg text-sm font-medium w-full text-center " +
     (styleMap[data.statusHari] || "");
 
-  jamSelect.dispatchEvent(new Event("change"));
+  jamSelect.dispatchEvent(new Event("input"));
 
   if (submitBtn) submitBtn.textContent = "Update";
   if (cancelBtn) cancelBtn.classList.remove("hidden");
@@ -502,7 +502,7 @@ function initForm() {
     perbaruiPoint();
   });
 
-  jamSelect.addEventListener("change", () => {
+  jamSelect.addEventListener("input", () => {
     perbaruiPoint();
   });
 
@@ -526,15 +526,16 @@ function initForm() {
   function perbaruiPoint() {
     const status = statusHidden.value;
     const jam = jamSelect.value;
+    const jamAngka = Number(jam);
 
-    if (!status || jam === "") {
+    if (!status || jam === "" || Number.isNaN(jamAngka) || jamAngka < 0) {
       pointPreview.textContent = "-";
       pointPreview.className =
         "w-full rounded-lg border border-dashed border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50 text-gray-400 dark:text-gray-500 px-3 py-2.5 text-sm";
       return;
     }
 
-    const point = hitungPoint(Number(jam), status);
+    const point = hitungPoint(jamAngka, status);
     pointPreview.textContent = `${formatAngka(point)} Point`;
     pointPreview.className =
       "w-full rounded-lg border border-primary-200 dark:border-primary-800 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 font-semibold px-3 py-2.5 text-sm";
@@ -575,8 +576,17 @@ function initForm() {
       showToast("Tanggal wajib diisi.", "error");
       return;
     }
-    if (jamSelect.value === "") {
-      showToast("Jam Lembur wajib dipilih.", "error");
+    const jamAngka = Number(jamSelect.value);
+    if (jamSelect.value === "" || Number.isNaN(jamAngka)) {
+      showToast("Jam Lembur wajib diisi dengan angka.", "error");
+      return;
+    }
+    if (jamAngka < 0) {
+      showToast("Jam Lembur tidak boleh kurang dari 0.", "error");
+      return;
+    }
+    if (jamAngka > 24) {
+      showToast("Jam Lembur tidak masuk akal (lebih dari 24 jam sehari).", "error");
       return;
     }
 
@@ -584,8 +594,8 @@ function initForm() {
       tanggal: tanggalInput.value,
       hari: hariInput.value,
       statusHari: statusHidden.value,
-      jamLembur: Number(jamSelect.value),
-      totalPoint: hitungPoint(Number(jamSelect.value), statusHidden.value),
+      jamLembur: jamAngka,
+      totalPoint: hitungPoint(jamAngka, statusHidden.value),
       keterangan: keteranganInput.value.trim(),
     };
 
