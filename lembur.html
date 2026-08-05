@@ -156,24 +156,16 @@
               <label for="input-jam" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Jam Lembur <span class="text-red-500">*</span>
               </label>
-              <select
+              <input
+                type="number"
                 id="input-jam"
                 required
-                class="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
-              >
-                <option value="">Pilih jam lembur</option>
-                <option value="0">0</option>
-                <option value="0.5">0.5</option>
-                <option value="1">1</option>
-                <option value="1.5">1.5</option>
-                <option value="2">2</option>
-                <option value="2.5">2.5</option>
-                <option value="3">3</option>
-                <option value="3.5">3.5</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
+                min="0"
+                max="24"
+                step="0.25"
+                placeholder="Contoh: 2.5"
+                class="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-3 py-2.5 text-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
+              />
             </div>
 
             <!-- Preview Point (aktif di tahap berikutnya) -->
